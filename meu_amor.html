@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Para o Meu Amor 💖</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+
+    body {
+      background-color: #8b0000;
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* Container para os corações animados */
+    .heart-container {
+      pointer-events: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    /* Estilo do coração */
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #ff4d6d;
+      transform: rotate(-45deg);
+      animation-name: fall;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      opacity: 0.8;
+    }
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #ff4d6d;
+      border-radius: 50%;
+    }
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+    .heart::after {
+      left: 10px;
+      top: 0;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-30px) rotate(-45deg);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(110vh) rotate(-45deg);
+        opacity: 0;
+      }
+    }
+
+    .pagina {
+      display: none;
+      padding: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ativa {
+      display: block;
+    }
+
+    .foto-inicial {
+      width: 80%;
+      max-width: 350px;
+      border-radius: 20px;
+      margin-top: 50px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      position: relative;
+      z-index: 1;
+    }
+
+    button {
+      padding: 15px 30px;
+      margin-top: 30px;
+      background-color: #ffb6c1;
+      border: none;
+      border-radius: 30px;
+      font-size: 18px;
+      color: #8b0000;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .bloco {
+      background-color: #fff;
+      color: #8b0000;
+      padding: 15px;
+      margin: 20px auto;
+      max-width: 400px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(255,255,255,0.2);
+      text-align: left;
+      position: relative;
+      z-index: 1;
+    }
+
+    .bloco img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+
+    .pergunta {
+      font-size: 20px;
+      margin-top: 40px;
+      font-weight: bold;
+      position: relative;
+      z-index: 1;
+    }
+
+    .botoes {
+      margin-top: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    #nao {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #ccc;
+      color: #000;
+      transition: 0.3s;
+    }
+
+    h1 {
+      margin-top: 20px;
+      font-size: 28px;
+      font-weight: bold;
+      position: relative;
+      z-index: 1;
+    }
+
+    p.nome {
+      font-size: 18px;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    button {
+      background-color: #e84a5f;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-family: 'Amatic SC', cursive;
+      font-size: 24px;
+      border-radius: 15px;
+      transition: 0.3s;
+      position: relative;
+      z-index: 1;
+    }
+    button:hover {
+      background-color: #ff9a9e;
+      box-shadow: 0 0 10px pink;
+    }
+
+    /* Estilo do botão e área secreta adicionados */
+    #btn-secret {
+      margin-top: 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    #secret-area {
+      display: none;
+      margin: 20px auto;
+      padding: 15px;
+      max-width: 400px;
+      border-radius: 15px;
+      background-color: #ffe6f0;
+      color: #8b0000;
+      box-shadow: 0 0 10px rgba(229, 195, 212, 0.7);
+      text-align: left;
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+  
+</head>
+<body>
+
+  
+  <button onclick="alterarConteudoPorHorario()">APERTA AQUI PRIMEIRO VIDA</button>
+<p id="mensagem-dia"></p>
+
+
+  <!-- QUIZ ROMÂNTICO -->
+  <div id="quizContainer" class="pagina">
+    <h2>RESPONDE O QUIZ (CERTINHO MOR!)</h2>
+    <div id="quiz">
+      <p id="question"></p>
+      
+      <button onclick="responder(true)">SIM</button>
+      <button onclick="responder(false)">NÃO</button>
+    </div>
+    
+    <p id="resultado"></p>
+  </div>
+
+
+  
+  <!-- CARTA ROMÂNTICA -->
+  <div id="cartaContainer" style="display:none;">
+    <h2>Sua Surpresa 💌</h2>
+    <p>Digite seu nome para abrir sua cartinha:</p>
+    <input type="text" id="nomeInput" placeholder="Digite seu nome" />
+    <button onclick="mostrarCarta()">Ler Cartinha</button>
+    <div id="carta" style="display:none;">
+      <p id="mensagemCarta"></p>
+      <div id="coracoes"></div>
+    </div>
+  </div>
+
+  <!-- Container para corações animados -->
+  <div class="heart-container" id="hearts"></div>
+
+  <!-- Página de abertura -->
+  <div class="pagina ativa" id="inicio">
+    <img src="c:\Users\Raissa Silva\Pictures\mor.png.jpg" alt="Foto nossa" class="foto-inicial" />
+    <h1>PARA O MEU AMOR 💌</h1>
+    <p class="nome">mor, espero que goste :) </p>
+    <button onclick="entrar()">Entrar</button>
+  </div>
+  
+
+  <!-- Conteúdo -->
+  <div class="pagina" id="conteudo">
+    <div class="bloco">
+      <img src="c:\Users\Raissa Silva\Pictures\olhares.png" alt="Foto juntos" />
+      <p><strong>1.</strong> Quando eu te olho, o mundo para e só existe a gente.</p>
+    </div>
+
+    <div class="bloco">
+      <img src="c:\Users\Raissa Silva\Pictures\solzin.png" alt="Foto 2" />
+      <p><strong>2.</strong> Sua risada me faz esquecer todos os problemas 🤍</p>
+    </div>
+
+    <div class="bloco">
+      <img src="c:\Users\Raissa Silva\Pictures\bjo.png" alt="Foto 3" />
+      <p><strong>3.</strong> seu beijo têm gosto de ‘fica pra sempre’</p>
+    </div>
+
+    <div class="bloco">
+      <img src="c:\Users\Raissa Silva\Pictures\noisdnv.png" alt="Foto 4" />
+      <p><strong>4.</strong> Quero construir um futuro com você, mor</p>
+    </div>
+
+    <div class="pergunta">VOCÊ ACEITA DAR SEU BUTICO PRA SEMPRE?</div>
+    <div class="botoes">
+      <button onclick="resposta()">SIM AMOR DA MINHA VIDA 💘</button>
+      <button id="nao" onmouseover="fugir()">EU NÃO</button>
+    </div>
+  </div>
+
+  <script>
+    function entrar() {
+      document.getElementById('inicio').classList.remove('ativa');
+      document.getElementById('conteudo').classList.add('ativa');
+      document.getElementById('quizContainer').classList.add('ativa');
+    }
+
+    function resposta() {
+      alert("EBAAAAAAAAAAAAAAAAAAAA");
+    }
+
+    function fugir() {
+      const btn = document.getElementById("nao");
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * -100 - 50;
+      btn.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    // Criar corações animados
+    const heartContainer = document.getElementById('hearts');
+
+    function criarCoracao() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + 'vw';  // posição horizontal aleatória
+      heart.style.animationDuration = (5 + Math.random() * 5) + 's'; // duração da animação entre 5 e 10 segundos
+      heart.style.width = heart.style.height = (10 + Math.random() * 20) + 'px'; // tamanho aleatório entre 10px e 30px
+      heartContainer.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 10000); // remove após 10s
+    }
+
+    setInterval(criarCoracao, 300);
+
+    // --- QUIZ ---
+
+    const perguntas = [
+      "Você lembra de como a gente se conheceu?",
+      "Sabia que eu te amo?",
+      "Você consegue lembrar de uma data importante nossa sem olhar o celular?",
+      "Você sente falta do meu toque?",
+      "Você fica tímida quando estamos sozinhas?",
+      "Quer que eu te faça um cafuné especial?",
+    ];
+
+    let indice = 0;
+    let respostasSim = 0;
+
+    const questionEl = document.getElementById('question');
+    const resultadoEl = document.getElementById('resultado');
+    const quizContainer = document.getElementById('quizContainer');
+
+    function mostrarPergunta() {
+      if (indice < perguntas.length) {
+        questionEl.textContent = perguntas[indice];
+        resultadoEl.textContent = "";
+      } else {
+        finalizarQuiz();
+      }
+    }
+
+    function responder(resposta) {
+      if (resposta) respostasSim++;
+      indice++;
+      mostrarPergunta();
+    }
+
+    function finalizarQuiz() {
+      quizContainer.innerHTML = `<h2>Resultado do Quiz</h2><p>Você respondeu "SIM" a ${respostasSim} de ${perguntas.length} perguntas.</p>`;
+      quizContainer.innerHTML += `<button onclick="mostrarCartaContainer()">Ver surpresa</button>`;
+    }
+
+    function mostrarCartaContainer() {
+      quizContainer.style.display = "none";
+      document.getElementById('conteudo').style.display = "block";
+      document.getElementById('cartaContainer').style.display = "block";
+    }
+
+    mostrarPergunta();
+
+    function alterarConteudoPorHorario() {
+  const hora = new Date().getHours();
+  const mensagem = document.getElementById("mensagem-dia");
+  const corpo = document.body;
+
+  if (hora >= 6 && hora < 12) {
+    mensagem.innerText = "BOM DIA VIDAAA, EU TE AMO, NUNCA ESQUEÇA DISSO VIDA, VOCÊ É CAPAZ DE TUDO!, agora pode arrastar pra baixo";
+    corpo.style.background = "#FFFBEA"; // cor clara, de manhã
+  } else if (hora >= 12 && hora < 18) {
+    mensagem.innerText = "OIIII, Tô pensando em você agora... Saudades! , agora pode arrastar pra baixo";
+    corpo.style.background = "#FFE4B5"; // cor quente, de tarde
+  } else if (hora >= 18 && hora < 21) {
+    mensagem.innerText = "Finalzinho de tarde e eu só consigo imaginar o quão bom seria se você estivesse aqui comigo, agora pode arrastar pra baixo";
+    corpo.style.background = "#FFDAB9"; // entardecer suave
+  } else {
+    mensagem.innerText = "Boa noite, mor. Queria que você estivesse aqui comigo, quentinha, recebendo muitos beijinhos, bjuuu, agora pode arrastar pra baixo";
+    corpo.style.background = "#1a1a2e"; // noite escura
+  }
+}
+
+
+    // --- CARTA ---
+
+    function mostrarCarta() {
+      const nome = document.getElementById('nomeInput').value.trim();
+      if (!nome) {
+        alert("Por favor, digite seu nome.");
+        return;
+      }
+      const carta = document.getElementById('carta');
+  const mensagem = `
+    Oi, mor…
+Eu tava aqui pensando em você (como sempre, né?) e senti vontade de escrever. Não é nada muito elaborado porque nao sei fazer site kkkkk aff.
+Desde que você entrou na minha vida, tudo tem ganhado cor, sentido e até um ritmo diferente. É engraçado como você virou meu pensamento favorito durante o dia e meu sonho bom à noite. Não tem um momento que eu não deseje estar do teu lado, mesmo que seja em silêncio, só sentindo tua presença.
+A forma como você sorri, como me olha, até quando tá brava comigo (amo) tudo em você me encanta. Você me acolhe, me entende, me acalma. E mesmo nos nossos momentos difíceis, é com você que eu quero estar, sempre.
+Eu só queria te lembrar do quanto você é especial pra mim, do quanto eu sou grata por ter você aqui. Você é mais do que minha namorada. Você é minha melhor amiga, meu porto seguro, minha casa. Você é o meu amor
+(Se eu pudesse, essa cartinha seria feita à mão… Mas como não dá por agora, eu dei um jeito e fiz esse mini site aqui mesmo kkkkk. Porque o que importa é te mostrar, de qualquer forma, o quanto você é especial pra mim.) /
+FELIZ DIA DOS NAMORADOS AMOR Eu te amo demais, pra sempre.
+  `;
+  document.getElementById('mensagemCarta').innerHTML = mensagem;
+  carta.style.display = "block";
+  
+
+
+    }
+
+  </script>
+
+</body>
+</html>
